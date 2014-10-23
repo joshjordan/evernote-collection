@@ -1,5 +1,6 @@
 *.rbc
 capybara-*.html
+env_init.rb
 .rspec
 /log
 /tmp
