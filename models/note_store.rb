@@ -15,7 +15,8 @@ class NoteStore
   end
 
   def resource(guid)
-    client.getResource(@oauth_token, guid, true, false, true, false)
+    resource = client.getResource(@oauth_token, guid, true, false, true, false)
+    { guid: resource.guid, content_type: resource.mime, raw_data: resource.data.body }
   end
 
   attr_reader :oauth_token

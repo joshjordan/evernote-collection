@@ -7,32 +7,11 @@ get '/' do
   erb :index
 end
 
-get %r{/items/(.*)} do |resource_guid|
-  data = settings.cache.get("resource:#{resource_guid}")
-  if !data
-    resource = NoteStore.new.resource(resource_guid)
-    resized = FastImage.resize(StringIO.new(resource.data.body), 0, 400)
-    data = File.read(resized)
-    settings.cache.set("resource:#{resource_guid}", data)
-  end
+SIZES = { 'items' => :full, 'thumbs' => :thumb }
 
-  content_type 'image/jpeg'
-  data
-end
+get %r{/(items|thumbs)/(.*)} do |type, guid|
+  image = Image.find(guid)
 
-get %r{/thumbs/(.*)} do |resource_guid|
-  data = settings.cache.get("resource-thumb:#{resource_guid}")
-  if !data
-    resource = NoteStore.new.resource(resource_guid)
-    resized = FastImage.resize(StringIO.new(resource.data.body), 125, 0)
-    data = File.read(resized)
-    settings.cache.set("resource-thumb:#{resource_guid}", data)
-  end
-
-  content_type 'image/jpeg'
-  data
-end
-
-get '/console' do
-  binding.pry
+  content_type image.content_type
+  image[SIZES[type]]
 end
