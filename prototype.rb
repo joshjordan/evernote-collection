@@ -28,14 +28,14 @@ end
 
 note_data = []
 note_results.each do |result|
-  # if no cache hit on <guid, updated>
   note_cache_key = ['note', result.guid, result.updated].join(':')
+  puts
   puts "Checking cache for note #{result.guid}..."
   note_data << (cache.get(note_cache_key) || begin
     puts "Cache miss. Fetching note #{result.guid}..."
     note = note_store.getNote(ENV['OAUTH_TOKEN'], result.guid,
       true, #include content
-      true, #include resource binary data
+      false, #include resource binary data
       false,
       false
     )
@@ -48,6 +48,7 @@ note_results.each do |result|
         { guid: r.guid, content_type: r.mime }
       end
     }.tap do |obj|
+      puts "Caching #{obj}"
       cache.set(note_cache_key, obj)
     end
   end)
