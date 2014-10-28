@@ -16,6 +16,8 @@ client = EvernoteOAuth::Client.new(
 )
 note_store = client.note_store(note_store_url: ENV['NOTE_STORE_URL'])
 
+# implemented up to here
+
 note_filter = Evernote::EDAM::NoteStore::NoteFilter.new(notebookGuid: ENV['COLLECTION_NOTEBOOK_GUID'])
 offset = 0
 result_spec = Evernote::EDAM::NoteStore::NotesMetadataResultSpec.new(includeUpdated: true)

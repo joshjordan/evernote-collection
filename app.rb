@@ -1,3 +1,5 @@
+set :cache, Dalli::Client.new
+
 get '/' do
-  nil
+  Notebook.collection_notebook.name
 end
