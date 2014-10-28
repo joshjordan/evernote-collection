@@ -1,5 +1,8 @@
 set :cache, Dalli::Client.new
 
 get '/' do
-  Notebook.collection_notebook.name
+  notebook = Notebook.collection_notebook
+  @page_title = @notebook_name = notebook.name
+  @notes = notebook.notes
+  erb :index
 end
