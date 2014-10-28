@@ -14,6 +14,10 @@ class NoteStore
     { guid: note.guid, version: note.updateSequenceNum, title: note.title, content: note.content, resources: note.resources.map { |r| { guid: r.guid, content_type: r.mime } } }
   end
 
+  def resource(guid)
+    client.getResource(@oauth_token, guid, true, false, true, false)
+  end
+
   attr_reader :oauth_token
 
   def client

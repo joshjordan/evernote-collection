@@ -6,8 +6,8 @@
     <% note.resources.each_with_index do |resource, index| %>
       <% image_title = note.title %>
       <% image_title += " (#{index + 1} of #{note.resources.count})" if note.resources.count > 1 %>
-      <a href="#" title="<%= image_title %>" data-gallery>
-          <img src="/<%= resource.guid %>" alt="<%= image_title %>">
+      <a href="/items/<%= resource.guid %>" title="<%= image_title %>" data-gallery>
+        <img src="/items/<%= resource.guid %>" alt="<%= image_title %>">
       </a>
     <% end %>
   <% end %>
