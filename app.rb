@@ -1,4 +1,11 @@
-set :cache, Dalli::Client.new
+set :cache, Dalli::Client.new(
+  (ENV['MEMCACHIER_SERVERS'] || 'localhost').split(','),
+  username: ENV['MEMCACHIER_USERNAME'],
+  password: ENV['MEMCACHIER_PASSWORD'],
+  failover: true,
+  socket_timeout: 1.5,
+  socket_failure_delay: 0.2
+)
 
 get '/' do
   notebook = Notebook.collection_notebook
