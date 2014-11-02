@@ -4,8 +4,8 @@ gem 'sinatra'
 
 gem 'dalli'
 gem 'evernote_oauth'
-gem 'fastimage_resize'
 gem 'hashie'
+gem 'mini_magick'
 
 group :development do
   gem 'pry'

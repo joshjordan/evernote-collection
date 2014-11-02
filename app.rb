@@ -10,7 +10,7 @@ end
 SIZES = { 'items' => :full, 'thumbs' => :thumb }
 
 get %r{/(items|thumbs)/(.*)} do |type, guid|
-  image = Image.find(guid)
+  image = ImageResource.find(guid)
 
   content_type image.content_type
   image[SIZES[type]]
