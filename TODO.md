@@ -8,3 +8,6 @@ In no particular order:
 * Listen to Evernote webhooks to know what a note is added or updated
   * Blow away caches as appropriate
 * Monitoring/alerting
+* Switch to Unicorn
+  * Requires some tuning. Depends on being able to monitor memory quota erros.
+  * https://devcenter.heroku.com/articles/rails-unicorn#adding-unicorn-to-your-application
