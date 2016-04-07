@@ -1,3 +1,5 @@
+require_relative 'dev' if ENV['RACK_ENV'] != 'production'
+
 set :cache, Dalli::Client.new(
   (ENV['MEMCACHIER_SERVERS'] || 'localhost').split(','),
   username: ENV['MEMCACHIER_USERNAME'],
